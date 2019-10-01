@@ -10,7 +10,7 @@ const resolvers = {
   },
   Mutation: {
     post: (root, args, context) => {
-      return context.prisma.createdLink({
+      return context.prisma.createLink({
         url: args.url,
         description: args.description
       });
