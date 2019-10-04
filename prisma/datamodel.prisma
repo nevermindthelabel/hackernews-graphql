@@ -2,7 +2,7 @@ type Link {
     id: ID! @id
     description: String!
     url: String!
-    postedBy: User!
+    postedBy: User
 }
 
 type User {
