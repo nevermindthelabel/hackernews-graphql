@@ -32,3 +32,9 @@ type User {
 type Subscription {
   newLink: Link
 }
+
+type Vote {
+  id: ID!
+  link: Link!
+  user: User!
+}
