@@ -17,12 +17,12 @@ const resolvers = {
     info: () => `This is the API of a Hackernews Clone`,
     feed: () => links,
     link: (parent, args) => {
-      const link = {
+      const theLink = {
         id: `link-${args.id}`,
         description: links[args.id].description,
         url: links[args.id].url
       };
-      return link;
+      return theLink;
     }
   },
   Mutation: {
