@@ -5,38 +5,33 @@ const path = require('path');
 
 const prisma = new PrismaClient();
 
-let links = [
-  {
-    id: 'link-0',
-    url: 'www.howtographql.com',
-    description: 'Full Stack tutorial for GraphQL'
-  }
-];
-
-let idCount = links.length;
-
 const resolvers = {
   Query: {
     info: () => `This is the API of a Hackernews Clone`,
-    feed: () => links,
-    link: (parent, args) => {
+    feed: async (parent, args, context) => {
+      return context.prisma.link.findMany();
+    },
+    link: (parent, args, context, info) => {
+      console.log(context.prisma.link);
       const theLink = {
-        id: `link-${args.id}`,
-        description: links[args.id].description,
-        url: links[args.id].url
+        id: `${args.id}`,
+        description: context.prisma.link.findUnique(
+          args => args.id === context.id
+        )
+        // url: context.prisma.link[args.id].url
       };
       return theLink;
     }
   },
   Mutation: {
-    post: (parent, args) => {
-      const link = {
-        id: `link-${idCount++}`,
-        description: args.description,
-        url: args.url
-      };
-      links.push(link);
-      return link;
+    post: (parent, args, context, info) => {
+      const newLink = context.prisma.link.create({
+        data: {
+          url: args.url,
+          description: args.description
+        }
+      });
+      return newLink;
     }
   }
 };
