@@ -6,6 +6,7 @@ const Query = require('./resolvers/Query.js');
 const Mutation = require('./resolvers/Mutation.js');
 const User = require('./resolvers/User');
 const Link = require('./resolvers/Link.js');
+const Subscription = require('./resolvers/Subscription.js');
 const fs = require('fs');
 const path = require('path');
 
@@ -16,7 +17,8 @@ const resolvers = {
   Query,
   Mutation,
   User,
-  Link
+  Link,
+  Subscription
 };
 
 const server = new ApolloServer({
