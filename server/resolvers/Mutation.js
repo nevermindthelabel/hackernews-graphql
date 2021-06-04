@@ -80,5 +80,6 @@ async function vote(parent, args, context, info) {
 module.exports = {
   signup,
   login,
-  post
+  post,
+  vote
 };
